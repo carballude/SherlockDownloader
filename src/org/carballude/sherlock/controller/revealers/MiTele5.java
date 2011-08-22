@@ -1,0 +1,19 @@
+package org.carballude.sherlock.controller.revealers;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+
+import org.carballude.sherlock.controller.excepions.InvalidLinkException;
+import org.carballude.utilities.HTML;
+
+public class MiTele5 implements Revealer {
+
+	@Override
+	public String revealLink(String link) throws MalformedURLException,
+			IOException, InvalidLinkException {
+		String source = HTML.HTMLSource(link);
+		String id = source.split("'http://level3/")[1].split("\\.")[0];
+		return "http://www.mitele.telecinco.es/deliverty/demo/resources/flv/" + id.charAt(id.length() - 1) + "/" + id.charAt(id.length() - 2) + "/" + id + ".flv";
+	}
+
+}
