@@ -74,6 +74,10 @@ public class TVE implements Revealer {
 	}
 	
 	private String getTVEALaCarta(String link) throws MalformedURLException, IOException, InvalidLinkException {
+		if(link.contains("/alacarta/audios/")){
+			String source = HTML.HTMLSource(link);
+			return source.split("<link rel=\"audio_src\" href=\"")[1].split("\"")[0];
+		}
 		String chunks[];
 		if (link.contains("#"))
 			chunks = link.split("#");
