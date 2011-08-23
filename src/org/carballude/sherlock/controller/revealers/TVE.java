@@ -24,9 +24,14 @@ public class TVE implements Revealer {
 		if(isRTVELink(link))
 			return getRTVELink(link);
 		String id = getId(link);
-		String url = generateVideoXmlUrl(id);
 		String source = "";
 		try {
+			source = HTML.HTMLSource(link);
+			String url = "";
+			if(source.contains("id='videoplayer"))
+				url = generateVideoXmlUrl(source.split("id='videoplayer")[1].split("'")[0]);
+			else
+				url = generateVideoXmlUrl(id);		
 			source = HTML.HTMLSource(url);
 		} catch (IOException e) {
 			if (source.isEmpty()) {
