@@ -11,6 +11,7 @@ import org.carballude.sherlock.controller.revealers.Antena3;
 import org.carballude.sherlock.controller.revealers.BarcelonaTV;
 import org.carballude.sherlock.controller.revealers.CanalSurALaCarta;
 import org.carballude.sherlock.controller.revealers.GoEar;
+import org.carballude.sherlock.controller.revealers.Intereconomia;
 import org.carballude.sherlock.controller.revealers.Megavideo;
 import org.carballude.sherlock.controller.revealers.MiTele5;
 import org.carballude.sherlock.controller.revealers.MySpace;
@@ -77,6 +78,10 @@ public class LinkRevealer implements Runnable {
 		return url.contains("www.myspace.com/");
 	}
 	
+	private boolean isIntereconomia(String url){
+		return url.contains("www.intereconomia.com/video/");
+	}
+	
 	public String getLink(String link) throws InvalidLinkException {
 		String downloadLink = null;
 		if (!(link.startsWith("http://") || link.startsWith("https://"))) {
@@ -107,6 +112,8 @@ public class LinkRevealer implements Runnable {
 				downloadLink = new TelevisioCatalunya().revealLink(link);
 			else if(isMySpace(link))
 				downloadLink = new MySpace().revealLink(link);
+			else if(isIntereconomia(link))
+				downloadLink = new Intereconomia().revealLink(link);
 			else
 				throw new InvalidLinkException();
 		} catch (IOException e) {
