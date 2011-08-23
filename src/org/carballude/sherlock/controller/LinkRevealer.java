@@ -17,6 +17,7 @@ import org.carballude.sherlock.controller.revealers.OndaCero;
 import org.carballude.sherlock.controller.revealers.RadiotelevisioValenciana;
 import org.carballude.sherlock.controller.revealers.TVE;
 import org.carballude.sherlock.controller.revealers.Tele5;
+import org.carballude.sherlock.controller.revealers.TelevisioCatalunya;
 import org.carballude.sherlock.model.LinkRevealedEvent;
 
 public class LinkRevealer implements Runnable {
@@ -67,6 +68,10 @@ public class LinkRevealer implements Runnable {
 		return url.contains("www.rtvv.es/va/");
 	}
 	
+	private boolean isTelevisioCatalunya(String url) {
+		return url.contains("www.tv3.cat/");
+	}
+	
 	public String getLink(String link) throws InvalidLinkException {
 		String downloadLink = null;
 		if (!(link.startsWith("http://") || link.startsWith("https://"))) {
@@ -93,6 +98,8 @@ public class LinkRevealer implements Runnable {
 				downloadLink = new CanalSurALaCarta().revealLink(link);
 			else if (isRadiotelevisioValenciana(link))
 				downloadLink = new RadiotelevisioValenciana().revealLink(link);
+			else if (isTelevisioCatalunya(link))
+				downloadLink = new TelevisioCatalunya().revealLink(link);
 			else
 				throw new InvalidLinkException();
 		} catch (IOException e) {

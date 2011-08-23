@@ -18,7 +18,7 @@ public class Starter {
 			}
 		else {
 			System.out.println("Sherlock Downloader - " + Manager.VERSION);
-			System.out.println("Finding video and audio from: TVE1, TVE2, RNE1, RNE5, Tele5, BTV, CanalSur A La Carta, RTVV, MegaVideo, OndaCero and GoEar");
+			System.out.println("Finding video and audio from: TVE1, TVE2, RNE1, RNE5, Tele5, BTV, CanalSur A La Carta, RTVV, TV3, MegaVideo, OndaCero and GoEar");
 			System.out.println();
 			System.out.println("Usage: java -jar <filename.jar>");
 			System.out.println("\tOption: --no-gui");
