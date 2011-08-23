@@ -15,7 +15,8 @@ public class TelevisioCatalunya implements Revealer {
 		String url = "http://www.tv3.cat/su/tvc/tvcConditionalAccess.jsp?ID=" + videoID + "&QUALITY=H&FORMAT=MP4";
 		String xml = HTML.HTMLSource(url);
 		if(xml.contains("<media videoname=")){
-			return xml.split("<media videoname=")[1].split(">")[1].split("<")[0];
+			String video = xml.split("<media videoname=")[1].split(">")[1].split("<")[0];
+			return "http://mp4-medium-dwn.media.tv3.cat/"+video.split(":")[2].split("\\?")[0];
 		}
 		throw new InvalidLinkException();
 	}
