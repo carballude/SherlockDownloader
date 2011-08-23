@@ -13,6 +13,7 @@ import org.carballude.sherlock.controller.revealers.CanalSurALaCarta;
 import org.carballude.sherlock.controller.revealers.GoEar;
 import org.carballude.sherlock.controller.revealers.Megavideo;
 import org.carballude.sherlock.controller.revealers.MiTele5;
+import org.carballude.sherlock.controller.revealers.MySpace;
 import org.carballude.sherlock.controller.revealers.OndaCero;
 import org.carballude.sherlock.controller.revealers.RadiotelevisioValenciana;
 import org.carballude.sherlock.controller.revealers.TVE;
@@ -72,6 +73,10 @@ public class LinkRevealer implements Runnable {
 		return url.contains("www.tv3.cat/");
 	}
 	
+	private boolean isMySpace(String url){
+		return url.contains("www.myspace.com/");
+	}
+	
 	public String getLink(String link) throws InvalidLinkException {
 		String downloadLink = null;
 		if (!(link.startsWith("http://") || link.startsWith("https://"))) {
@@ -100,6 +105,8 @@ public class LinkRevealer implements Runnable {
 				downloadLink = new RadiotelevisioValenciana().revealLink(link);
 			else if (isTelevisioCatalunya(link))
 				downloadLink = new TelevisioCatalunya().revealLink(link);
+			else if(isMySpace(link))
+				downloadLink = new MySpace().revealLink(link);
 			else
 				throw new InvalidLinkException();
 		} catch (IOException e) {
