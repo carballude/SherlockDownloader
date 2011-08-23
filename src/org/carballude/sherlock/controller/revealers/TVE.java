@@ -143,7 +143,7 @@ public class TVE implements Revealer {
 	}
 	
 	private String getAssetId(String source) {
-		return source.split("assetDataId::")[1].substring(0, 6);
+		return source.split("assetDataId::")[1].split("\"")[0];
 	}
 	
 	private String generateAssetDownloadLocation(String format, String relativeLocation) {
@@ -151,7 +151,7 @@ public class TVE implements Revealer {
 	}
 	
 	private String generateAssetDataVideoIdXmlUrl(String id) {
-		return "http://www.rtve.es/scd/CONTENTS/ASSET_DATA_VIDEO/" + id.charAt(5) + "/" + id.charAt(4) + "/" + id.charAt(3) + "/" + id.charAt(2) + "/ASSET_DATA_VIDEO-" + id + ".xml";
+		return "http://www.rtve.es/scd/CONTENTS/ASSET_DATA_VIDEO/" + id.charAt(id.length()-1) + "/" + id.charAt(id.length()-2) + "/" + id.charAt(id.length()-3) + "/" + id.charAt(id.length()-4) + "/ASSET_DATA_VIDEO-" + id + ".xml";
 	}
 
 }
