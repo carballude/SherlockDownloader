@@ -19,8 +19,11 @@ public class TVE implements Revealer {
 	@Override
 	public String revealLink(String link) throws MalformedURLException,
 			IOException, InvalidLinkException {				
-		if(isTVEALaCarta(link))
-		 return getTVEALaCarta(link);
+		if(isTVEALaCarta(link)) {
+			if(link.contains("#"))			// | Allows the use of links with anchors
+				link=link.split("#")[0];    // |
+			return getTVEALaCarta(link);
+		}
 		if(isRTVELink(link))
 			return getRTVELink(link);
 		String id = getId(link);
