@@ -72,7 +72,7 @@ public class LinkRevealer implements Runnable {
 	}
 	
 	private boolean isTelevisioCatalunya(String url) {
-		return url.contains("www.tv3.cat/");
+		return url.contains("www.tv3.cat/") || url.contains("www.3xl.cat/");
 	}
 	
 	private boolean isMySpace(String url){

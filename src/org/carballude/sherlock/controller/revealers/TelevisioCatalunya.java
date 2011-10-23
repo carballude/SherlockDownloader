@@ -27,7 +27,8 @@ public class TelevisioCatalunya implements Revealer {
 		else if(link.contains("www.tv3.cat/3alacarta/")){
 			String[] aux = link.split("/");
 			return aux[aux.length-1];
-		}
+		} else if(link.contains("www.3xl.cat/videos/"))
+			return link.split("www.3xl.cat/videos/")[1].split("/")[0];
 		throw new InvalidLinkException();
 	}
 
