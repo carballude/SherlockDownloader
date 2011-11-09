@@ -19,7 +19,7 @@ public class Manager {
 
 	private ArrayList<Download> downloads;
 	
-	public static final int VERSION = 201110240;
+	public static final int VERSION = 201111090;
 	
 	private IGUI gui;
 
