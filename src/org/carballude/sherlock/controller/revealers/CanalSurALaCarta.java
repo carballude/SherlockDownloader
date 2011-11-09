@@ -16,7 +16,7 @@ public class CanalSurALaCarta implements Revealer {
 		if (htmlSource.contains("_url_xml_datos=")) {
 			String xmlSource = HTML.HTMLSource(htmlSource.split("_url_xml_datos=")[1].split("\"")[0]);
 			if (xmlSource.contains("<url>http://ondemand.rtva") && xmlSource.contains("</url>")) {
-				address = xmlSource.split("<url>http://ondemand.rtva")[1].split("</url>")[0];
+				address =  "http://ondemand.rtva" + xmlSource.split("<url>http://ondemand.rtva")[1].split("</url>")[0];
 			} else
 				throw new InvalidLinkException();
 		} else {
