@@ -15,7 +15,6 @@ import org.carballude.sherlock.controller.revealers.EuskalIrratiTelebista;
 import org.carballude.sherlock.controller.revealers.GoEar;
 import org.carballude.sherlock.controller.revealers.Intereconomia;
 import org.carballude.sherlock.controller.revealers.Megavideo;
-import org.carballude.sherlock.controller.revealers.MiTele5;
 import org.carballude.sherlock.controller.revealers.MySpace;
 import org.carballude.sherlock.controller.revealers.OndaCero;
 import org.carballude.sherlock.controller.revealers.PlanetaUrbe;
@@ -38,11 +37,7 @@ public class LinkRevealer implements Runnable {
 	}
 
 	private boolean isTele5Link(String url) {
-		return url.contains("www.telecinco.es/") && url.contains("VideoViewer.shtml?videoURL=");
-	}
-
-	private boolean isMiTele5Link(String url) {
-		return url.contains("www.mitele.telecinco.es");
+		return url.contains("www.telecinco.es/") || url.contains("www.mitele.telecinco.es");
 	}
 
 	private boolean isGoEarLink(String url) {
@@ -105,8 +100,6 @@ public class LinkRevealer implements Runnable {
 		try {
 			if (isTVELink(link))
 				downloadLink = new TVE().revealLink(link);
-			else if (isMiTele5Link(link))
-				downloadLink = new MiTele5().revealLink(link);
 			else if (isTele5Link(link))
 				downloadLink = new Tele5().revealLink(link);
 			else if (isGoEarLink(link))
