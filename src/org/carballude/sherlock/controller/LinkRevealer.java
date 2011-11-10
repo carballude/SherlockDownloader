@@ -21,6 +21,7 @@ import org.carballude.sherlock.controller.revealers.OndaCero;
 import org.carballude.sherlock.controller.revealers.PlanetaUrbe;
 import org.carballude.sherlock.controller.revealers.RTVCastillaMancha;
 import org.carballude.sherlock.controller.revealers.RadiotelevisioValenciana;
+import org.carballude.sherlock.controller.revealers.Ser;
 import org.carballude.sherlock.controller.revealers.TVE;
 import org.carballude.sherlock.controller.revealers.Tele5;
 import org.carballude.sherlock.controller.revealers.TelevisioCatalunya;
@@ -102,6 +103,10 @@ public class LinkRevealer implements Runnable {
 		return url.contains("www.cope.es");
 	}
 	
+	private boolean isSer(String url){
+		return url.contains("www.cadenaser.com");
+	}
+	
 	public String getLink(String link) throws InvalidLinkException {
 		String downloadLink = null;
 		if (!(link.startsWith("http://") || link.startsWith("https://"))) {
@@ -142,6 +147,8 @@ public class LinkRevealer implements Runnable {
 				downloadLink = new RTVCastillaMancha().revealLink(link);
 			else if(isCope(link))
 				downloadLink = new Cope().revealLink(link);
+			else if(isSer(link))
+				downloadLink=new Ser().revealLink(link);
 			else
 				throw new InvalidLinkException();
 		} catch (IOException e) {
