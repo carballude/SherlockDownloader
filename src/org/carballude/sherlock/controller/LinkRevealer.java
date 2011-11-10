@@ -10,6 +10,7 @@ import org.carballude.sherlock.controller.excepions.InvalidLinkException;
 import org.carballude.sherlock.controller.revealers.Antena3;
 import org.carballude.sherlock.controller.revealers.BarcelonaTV;
 import org.carballude.sherlock.controller.revealers.CanalSurALaCarta;
+import org.carballude.sherlock.controller.revealers.Cope;
 import org.carballude.sherlock.controller.revealers.Cuatro;
 import org.carballude.sherlock.controller.revealers.EuskalIrratiTelebista;
 import org.carballude.sherlock.controller.revealers.GoEar;
@@ -58,7 +59,7 @@ public class LinkRevealer implements Runnable {
 	}
 
 	private boolean isOndaCeroLink(String url) {
-		return url.contains("www.ondacero.es/OndaCero/play/");
+		return url.contains("www.ondacero.es/OndaCero/play/") || url.contains("www.ondacero.es/audios-online/");
 	}
 
 	private boolean isCanalSurALaCarta(String url) {
@@ -95,6 +96,10 @@ public class LinkRevealer implements Runnable {
 	
 	private boolean isRTVCastillaMancha(String url){
 		return url.contains("www.rtvcm.es");
+	}
+	
+	private boolean isCope(String url){
+		return url.contains("www.cope.es");
 	}
 	
 	public String getLink(String link) throws InvalidLinkException {
@@ -135,6 +140,8 @@ public class LinkRevealer implements Runnable {
 				downloadLink = new PlanetaUrbe().revealLink(link);
 			else if(isRTVCastillaMancha(link))
 				downloadLink = new RTVCastillaMancha().revealLink(link);
+			else if(isCope(link))
+				downloadLink = new Cope().revealLink(link);
 			else
 				throw new InvalidLinkException();
 		} catch (IOException e) {
