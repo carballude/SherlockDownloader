@@ -18,6 +18,7 @@ import org.carballude.sherlock.controller.revealers.Megavideo;
 import org.carballude.sherlock.controller.revealers.MySpace;
 import org.carballude.sherlock.controller.revealers.OndaCero;
 import org.carballude.sherlock.controller.revealers.PlanetaUrbe;
+import org.carballude.sherlock.controller.revealers.RTVCastillaMancha;
 import org.carballude.sherlock.controller.revealers.RadiotelevisioValenciana;
 import org.carballude.sherlock.controller.revealers.TVE;
 import org.carballude.sherlock.controller.revealers.Tele5;
@@ -92,6 +93,10 @@ public class LinkRevealer implements Runnable {
 		return url.contains("www.planetaurbe.tv");
 	}
 	
+	private boolean isRTVCastillaMancha(String url){
+		return url.contains("www.rtvcm.es");
+	}
+	
 	public String getLink(String link) throws InvalidLinkException {
 		String downloadLink = null;
 		if (!(link.startsWith("http://") || link.startsWith("https://"))) {
@@ -128,6 +133,8 @@ public class LinkRevealer implements Runnable {
 				downloadLink = new Cuatro().revealLink(link);
 			else if(isPlanetaUrbe(link))
 				downloadLink = new PlanetaUrbe().revealLink(link);
+			else if(isRTVCastillaMancha(link))
+				downloadLink = new RTVCastillaMancha().revealLink(link);
 			else
 				throw new InvalidLinkException();
 		} catch (IOException e) {
