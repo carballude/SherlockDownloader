@@ -12,7 +12,7 @@ public class Intereconomia implements Revealer {
 	public String revealLink(String link) throws MalformedURLException,
 			IOException, InvalidLinkException {
 		String source = HTML.HTMLSource(link);
-		if(source.contains("\"playervideo\"") && source.contains("playlist")){
+		if(source.contains("\"playervideo") && source.contains("playlist")){
 			return source.split("playlist")[1].split("url: '")[1].split("\'")[0];
 		}
 		throw new InvalidLinkException();

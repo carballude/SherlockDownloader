@@ -23,7 +23,7 @@ public class Antena3 implements Revealer {
 				String xmlSource = HTML.HTMLSource("http://www.antena3.com" + htmlSource.split("player_capitulo.xml='")[1].split("'")[0]);
 				address = "http://desprogresiva.antena3.com/" + xmlSource.split("<archivo><!\\[CDATA\\[")[1].split("\\]")[0];
 			}
-			address = address.replace("001.mp4", "000.mp4");
+			//address = address.replace("001.mp4", "000.mp4"); <-- This does not work anymore :(
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new InvalidLinkException();
 		}
