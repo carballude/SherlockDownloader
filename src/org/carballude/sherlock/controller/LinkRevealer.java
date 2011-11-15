@@ -9,6 +9,7 @@ import java.net.URL;
 import org.carballude.sherlock.controller.excepions.InvalidLinkException;
 import org.carballude.sherlock.controller.revealers.Antena3;
 import org.carballude.sherlock.controller.revealers.BarcelonaTV;
+import org.carballude.sherlock.controller.revealers.CanalPlus;
 import org.carballude.sherlock.controller.revealers.CanalSurALaCarta;
 import org.carballude.sherlock.controller.revealers.Cope;
 import org.carballude.sherlock.controller.revealers.Cuatro;
@@ -107,6 +108,10 @@ public class LinkRevealer implements Runnable {
 		return url.contains("www.cadenaser.com");
 	}
 	
+	private boolean isCanalPlus(String url){
+		return url.contains("canalplus.es");
+	}
+	
 	public String getLink(String link) throws InvalidLinkException {
 		String downloadLink = null;
 		if (!(link.startsWith("http://") || link.startsWith("https://"))) {
@@ -149,6 +154,8 @@ public class LinkRevealer implements Runnable {
 				downloadLink = new Cope().revealLink(link);
 			else if(isSer(link))
 				downloadLink=new Ser().revealLink(link);
+			else if(isCanalPlus(link))
+				downloadLink = new CanalPlus().revealLink(link);
 			else
 				throw new InvalidLinkException();
 		} catch (IOException e) {
