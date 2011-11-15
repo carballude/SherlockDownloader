@@ -7,9 +7,12 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -143,6 +146,19 @@ public class MainWindow extends JFrame implements LinkRevealedListener, IGUI {
 	}
 
 	public void showUpdateAvailable() {
-		JOptionPane.showMessageDialog(this, "¡Hay una actualización disponible!\nDescárgala de http://www.carballude.es/blog/?p=1019","Actualización disponible",JOptionPane.INFORMATION_MESSAGE);
+		final JButton downloadButton = new JButton("Descargar");
+		downloadButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					java.awt.Desktop.getDesktop().browse(URI.create("http://www.carballude.es/blog/?p=1019"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}});
+		final JComponent[] components = new JComponent[]{new JLabel("Hay una actualizaci—n disponible que puede obtener desde:"),new JLabel("http://www.carballude.es/blog/?p=1019"),new JButton("Descargar")};
+		JOptionPane.showMessageDialog(this, components, "Actualizaci—n disponible", JOptionPane.INFORMATION_MESSAGE);
 	}
 }
