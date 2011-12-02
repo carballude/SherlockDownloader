@@ -26,6 +26,7 @@ import org.carballude.sherlock.controller.revealers.Ser;
 import org.carballude.sherlock.controller.revealers.TVE;
 import org.carballude.sherlock.controller.revealers.Tele5;
 import org.carballude.sherlock.controller.revealers.TelevisioCatalunya;
+import org.carballude.sherlock.controller.revealers.TwitchTv;
 import org.carballude.sherlock.model.LinkRevealedEvent;
 
 public class LinkRevealer implements Runnable {
@@ -112,6 +113,10 @@ public class LinkRevealer implements Runnable {
 		return url.contains("canalplus.es");
 	}
 	
+	private boolean isTwitchTv(String url) {
+		return url.contains("twitch.tv") && url.contains("/b/");
+	}
+	
 	public String getLink(String link) throws InvalidLinkException {
 		String downloadLink = null;
 		if (!(link.startsWith("http://") || link.startsWith("https://"))) {
@@ -156,6 +161,8 @@ public class LinkRevealer implements Runnable {
 				downloadLink=new Ser().revealLink(link);
 			else if(isCanalPlus(link))
 				downloadLink = new CanalPlus().revealLink(link);
+			else if(isTwitchTv(link))
+				downloadLink = new TwitchTv().revealLink(link);
 			else
 				throw new InvalidLinkException();
 		} catch (IOException e) {
