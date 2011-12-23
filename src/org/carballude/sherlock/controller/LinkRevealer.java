@@ -13,6 +13,7 @@ import org.carballude.sherlock.controller.revealers.CanalPlus;
 import org.carballude.sherlock.controller.revealers.CanalSurALaCarta;
 import org.carballude.sherlock.controller.revealers.Cope;
 import org.carballude.sherlock.controller.revealers.Cuatro;
+import org.carballude.sherlock.controller.revealers.ElRellano;
 import org.carballude.sherlock.controller.revealers.EuskalIrratiTelebista;
 import org.carballude.sherlock.controller.revealers.GoEar;
 import org.carballude.sherlock.controller.revealers.Intereconomia;
@@ -117,6 +118,10 @@ public class LinkRevealer implements Runnable {
 		return url.contains("twitch.tv") && url.contains("/b/");
 	}
 	
+	private boolean isElRellano(String url){
+		return url.contains("elrellano.com");
+	}
+	
 	public String getLink(String link) throws InvalidLinkException {
 		String downloadLink = null;
 		if (!(link.startsWith("http://") || link.startsWith("https://"))) {
@@ -163,6 +168,8 @@ public class LinkRevealer implements Runnable {
 				downloadLink = new CanalPlus().revealLink(link);
 			else if(isTwitchTv(link))
 				downloadLink = new TwitchTv().revealLink(link);
+			else if(isElRellano(link))
+				downloadLink = new ElRellano().revealLink(link);
 			else
 				throw new InvalidLinkException();
 		} catch (IOException e) {
